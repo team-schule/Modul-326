@@ -154,7 +154,7 @@
                     session.setAttribute("Vorname", rs.getString("Vorname"));
                     session.setAttribute("Nachname", rs.getString("Nachname"));
                     session.setAttribute("Benutzername",rs.getString("Benutzername"));
-                    session.setAttribute("Letzte_Aktivitaet", rs.getString("Letzte_Aktivitaet"));
+                    session.setAttribute("Letzte_Aktivitaet", rs.getString("Letzte_Aenderung"));
                     session.setAttribute("Id", rs.getInt("Benutzer_ID"));
                     session.setAttribute("kartenNummer",0);
                     rs.close();

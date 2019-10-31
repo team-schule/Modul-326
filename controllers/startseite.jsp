@@ -242,7 +242,7 @@ h3,h4{
                     }
                 }
                 // String für die Lernsprache wird Implementiert und mit If Blöcken zugeteilt
-                String lernsprache = "";
+                String lernsprache = "Test";
                 if (sprache[kartenNummer] == 1) lernsprache = "Französisch";
                 if (sprache[kartenNummer] == 2) lernsprache = "Englisch";
                 if (sprache[kartenNummer] == 3) lernsprache = "Italienisch";

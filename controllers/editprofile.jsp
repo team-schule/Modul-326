@@ -39,7 +39,7 @@ p{
             session.setAttribute("Nachname", rs.getString("Nachname"));
             session.setAttribute("Anrede", rs.getString("Anrede"));
             session.setAttribute("Email", rs.getString("Email"));
-            session.setAttribute("Aktiv", rs.getString("Letzte_Aktivitaet"));   
+            session.setAttribute("Aktiv", rs.getString("Letzte_Aenderung"));   
             rs.close();
         }
     }
