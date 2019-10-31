@@ -11,6 +11,13 @@
       text-align: center;
     
     }
+    h3{
+        color: red;
+        text-align: center;
+    }
+    p{
+        text-align: center;
+    }
     body{
      background-color: lightgrey;
     }
@@ -20,9 +27,11 @@
     }
   </style>
   <body>
-  <h1>Keine Verbindung zum Server</h1>
+  <h1>Fehler</h1>
+  <h3> Fehlermeldung: <%= session.getAttribute("error")%> </h3>
+  <p>Bitte erneut versuchen oder den Admin benachrichtigen</P>
   <br>
-  <img src="./Bilder/error.jpg" alt="Server Fehler" width="40%">
+  <img src="./Bilder/fehler.jpg" alt="Server Fehler" width="40%">
   <br>
   <br>
   <br>

@@ -40,6 +40,14 @@
     <%
   }
 %>
+<%
+  if (request.getAttribute("registriert") != null)
+  {
+    %>
+    <h4 style="color:green;">Erfolgreich Registriert. Bitte Einloggen</h4>
+    <%
+  }
+%>
 <br>
 <form action = "index.jsp" method = "POST">
   <div class="form-group">
@@ -51,7 +59,7 @@
     <input type="password" class="form-control" id="exampleInputPassword1" Name="password" placeholder="Password">
   </div>
   <br>
-  <button type="submit" Name="login" class="btn btn-primary">Login</button>
+  <button type="submit" Name="login" class="btn btn-success">Login</button>
   <button Name="register" class="btn btn-primary">Registrieren</button>
 </form>
 </div>

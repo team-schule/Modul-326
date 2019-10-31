@@ -1,82 +1,91 @@
 <style>
 body{
-       background-image: url("./Bilder/titelbild.png");
-       margin: 20px;
-       background-repeat:none;
-    }
+    background-image: url("./Bilder/titelbild.png");
+    margin: 20px;
+    background-repeat:none;
+}
 .test{
-  width: 60%;
-  height:50%;
-  margin-left: 10%;
-  background-color: lightgrey;
-  border-radius:7px;
-
+    width: 60%;
+    height:50%;
+    margin-left: 10%;
+    background-color: lightgrey;
+    border-radius:7px;
 }
 .edit{
-  margin:5%;
+    margin:5%;
 }
 h2{
-  margin-left:10%;
+    margin-left:10%;
 }
 p{
-  margin-left:65%;
+    margin-left:65%;
+}
+#buttonunten{
 }
 
 </style>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-    Class.forName("com.mysql.jdbc.Driver"); 
-    Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/fremdsprachen","root",""); 
-    Statement s = con.createStatement(); 
+<% 
     String sql =  sql="SELECT * FROM benutzer WHERE Benutzer_ID= '"+session.getAttribute("Id")+"'";
-
-    ResultSet rs = s.executeQuery(sql);
-    if (rs.next())
+    // Try Catch Block um Sicher zu stellen das die Verbindung zur DB besteht
+    try 
     {
-        session.setAttribute("Vorname", rs.getString("Vorname"));
-        session.setAttribute("Nachname", rs.getString("Nachname"));
-        session.setAttribute("Anrede", rs.getString("Anrede"));
-        session.setAttribute("Email", rs.getString("Email"));
-        session.setAttribute("Aktiv", rs.getString("Letzte_Aktivitaet"));   
+        conn = DriverManager.getConnection(url, dbuser, pw);
+        st = conn.createStatement(); 
+        rs = st.executeQuery(sql);
+        if (rs.next())
+        {
+            session.setAttribute("Vorname", rs.getString("Vorname"));
+            session.setAttribute("Nachname", rs.getString("Nachname"));
+            session.setAttribute("Anrede", rs.getString("Anrede"));
+            session.setAttribute("Email", rs.getString("Email"));
+            session.setAttribute("Aktiv", rs.getString("Letzte_Aktivitaet"));   
+            rs.close();
+        }
     }
-    else
+    catch (Exception e) 
     {
-        response.sendRedirect("http://localhost:8080/dbTest/errorPage.jsp");  
+        dbStatus = "error";
     }
-    rs.close();
+    // Ist die DB nicht erreichbar bei der Abfrage wird zur ErrorPage weitergeleitet
+    if (dbStatus != null){
+        response.sendRedirect("http://localhost:8080/fremdsprachen/errorPage.jsp"); 
+    }
+    
 %>
 <body>
 <h2>Profil von  <%= session.getAttribute("Benutzername") %> : </h2>
-
-
 <div class="test">
 <div class="edit">
 <%
-  if (request.getAttribute("edit") != null)
-  {
-    %>
-    <h4 style="color:green;">Daten erfolgreich geändert</h4>
-    <%
-  }
+    // wurden die Daten erfolgreich geändert wird beim neuladen der EdditSeite eine Meldung angezeigt
+    if (request.getAttribute("edit") != null)
+    {
+        %>
+            <h4 style="color:green;">Daten erfolgreich geändert</h4>
+        <%
+    }
 %>
 <form action = "index.jsp" method = "POST">
-  <div class="form-group">
+    <div class="form-group">
     <div class="form-group">
     <label for="exampleFormControlSelect1">Anrede</label>
     <select class="form-control" id="exampleFormControlSelect1" name="anrede">
     <%
     String geschlecht = (String) session.getAttribute("Anrede");
-    if (geschlecht.equals("Herr")){
-      %>
-      <option selected>Herr</option>
-      <option>Frau</option>
-      <%
+    if (geschlecht.equals("Herr"))
+    {
+        %>
+        <option selected>Herr</option>
+        <option>Frau</option>
+        <%
     }
-    else{
-      %>
-      <option>Herr</option>
-      <option selected>Frau</option>
-      <%
+    else
+    {
+        %>
+        <option>Herr</option>
+        <option selected>Frau</option>
+        <%
     }
     %>
     </select>
@@ -106,14 +115,30 @@ p{
     </small>
   </div>
   <br>
-  <button type="submit" Name="aendern" class="btn btn-primary">Ändern</button>
+  <button type="submit" Name="aendern" class="btn btn-success">Ändern</button>
+  <button type="reset" class="btn btn-warning">Reset</button>
 </form>
 <br>
+<div id="buttonunten">
 <form action = "index.jsp" method = "POST">
  <button type="submit" Name="login" class="btn btn-primary">Zur Startseite</button>
+  <button style="margin-left:50%;" id="btn-confirm" type="submit" name="delete" onclick="return clicked()" class="btn btn-danger">Profil löschen</button>
 </form>
+</div>
+
 <p>Letze Aktivität: <%= session.getAttribute("Aktiv") %> </p>
 </div>
 </div>
 
 </body>
+
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Profil: <%= session.getAttribute("Vorname") %>'+ ' ' + '<%= session.getAttribute("Nachname") %> löschen ? ')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+
+</script>

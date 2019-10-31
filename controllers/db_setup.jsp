@@ -5,16 +5,11 @@
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/fremdsprachen";
-            String user = "root";
-            String pw = "";
-            Connection conn = DriverManager.getConnection(url, user, pw); 
+            conn = DriverManager.getConnection(url, dbuser, pw); 
             application.setAttribute ("db", conn);
         }
         catch (Exception e){
-            application.setAttribute ("db", null);
-            
-
+            application.setAttribute ("db", null); 
         }
     }
     %>
