@@ -46,17 +46,17 @@ body{
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Vorname:</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" required
+    <input type="text" class="form-control" id="exampleInputPassword1" pattern="[A-Za-z]{3,30}" required
         Name="vorName" placeholder="Vorname">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Nachname:</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" required
+    <input type="text" class="form-control" id="exampleInputPassword1" pattern="[A-Za-z]{3,30}" required
         Name="nachName" placeholder="Nachname">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Login Name:</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" required
+    <input type="text" class="form-control" id="exampleInputPassword1" pattern="[A-Za-z]{3,30}" required
         Name="loginName" placeholder="LoginName">
   </div>
   <div class="form-group">
@@ -66,7 +66,7 @@ body{
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password:</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" pattern=".{6,12}" title="Passwort muss eine Länge zwischen 8 und 12 Zeichen haben" 
+    <input type="password" class="form-control" id="exampleInputPassword1" pattern="{6,12}" title="Passwort muss eine Länge zwischen 8 und 12 Zeichen haben" 
         Name="password" placeholder="Password" required>
     <small id="passwordHelpBlock" class="form-text text-muted">
         Passwort muss eine Länge zwischen 8 und 12 Zeichen haben

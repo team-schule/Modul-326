@@ -128,6 +128,9 @@ h3,h4{
 #unterkarte{
     display: flex;
 }
+.neueKarte {
+    margin-left: 20%;
+}
 </style>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -172,6 +175,10 @@ h3,h4{
     catch (Exception e)
     {
         dbStatus = "error";
+    }
+    finally
+    {
+        conn.close();
     }
     // Besteht keine Verbindung zur DB wird zur errorPage weitergeleitet
     if (dbStatus != null)
@@ -218,9 +225,19 @@ h3,h4{
                 }
             }
         %>
+        <br>
+        <br>
+         <form action ="index.jsp" method="Post">
+            <button id="bibedit" name="bibedit">Bibliothek bearbeiten</button>
+        </form>
     </div>
     <div class="karte">
         <h2 class="htitel">Lernkarten</h2>
+        <div class="neueKarte">
+        <form action ="index.jsp" method="Post">
+            <button class="btn btn-danger" id="editKarten" name="editKarten">Lernkarten bearbeiten</button>
+        </form>
+        </div>
         <br>
         <br>
         <div id="lernkarte">

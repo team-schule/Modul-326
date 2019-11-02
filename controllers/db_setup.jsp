@@ -11,5 +11,9 @@
         catch (Exception e){
             application.setAttribute ("db", null); 
         }
+        finally
+        {
+            conn.close();
+        }
     }
     %>

@@ -47,6 +47,10 @@ p{
     {
         dbStatus = "error";
     }
+    finally
+    {
+        conn.close();
+    }
     // Ist die DB nicht erreichbar bei der Abfrage wird zur ErrorPage weitergeleitet
     if (dbStatus != null){
         response.sendRedirect("http://localhost:8080/fremdsprachen/errorPage.jsp"); 
@@ -93,12 +97,12 @@ p{
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Vorname:</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" required
+    <input type="text" class="form-control" id="exampleInputPassword1" pattern="[A-Za-z]{3,30}" required
         Name="vorname" placeholder="Vorname" value="<%= session.getAttribute("Vorname") %>">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Nachname:</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" required
+    <input type="text" class="form-control" id="exampleInputPassword1" pattern="[A-Za-z]{3,30}" required
         Name="nachname" placeholder="Nachname" value="<%= session.getAttribute("Nachname") %>">
   </div>
   <div class="form-group">
